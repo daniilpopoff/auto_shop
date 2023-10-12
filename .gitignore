@@ -1,0 +1,4 @@
+env
+.env
+project_arcitecture.txt
+db.sqlite3
