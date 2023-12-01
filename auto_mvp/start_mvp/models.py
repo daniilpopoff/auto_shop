@@ -13,7 +13,8 @@ import os
 class Category(models.Model):
     category = models.CharField(max_length=20, default="легковые")
 
-
+    def __str__(self):
+        return self.category
 def car_image_path(instance, filename):
     # Get the car's name from the instance
     car_name = instance.car_name
@@ -51,8 +52,8 @@ class CarAnnouncement(models.Model):
     # Define the Category model (if not already defined)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # Foreign Key to Category model
 
-
-
+    def __str__(self):
+        return self.name_car
 
 
     def colored_name(self):

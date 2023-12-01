@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarList</title>
+</head>
+<body>
+<div style="background-color: darksalmon">
+    <center>
+        <h1>CRUD</h1>
+        <button style="width: 100px; height: 50px; background-color: lawngreen">
+            <a href="/create_car/">Добавить</a>
+        </button>
+    </center>
+</div>
+
+<div class="block1" style="background-color: darkgray;">
+    <ul>
+        {% for car in object_list %}
+        <li>
+            <h1>Name of car:{{car.name_car}}</h1>
+            <p>mealege :{{car.age}}</p>
+            <p>Prise USD :{{car.price_usd}}</p>
+            <p>year :{{car.year}}</p>
+
+
+
+            <a href="{% url 'car_detail' id=car.id %}" class="a1">Детально</a>
+            <a href="/car_list/{{car.id}}/delete/" class="a2">Удалить</a>
+            <a href="/car_list/{{car.id}}/update/" class="a3">Изменить</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<style>
+    .block1 a {
+        text-decoration: none;
+        font-size: 30px;
+    }
+
+    .a1 {
+        color: green;
+        border:4px solid green;
+    }
+
+    .a2 {
+        color: red;
+        border: 4px solid red;
+    }
+
+    .a3 {
+        color: #65550c;
+        border:4px solid #65550c ;
+    }
+
+</style>
+</body>
+</html>
+</html>
