@@ -10,10 +10,15 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
+
+
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key = True)
     phone_number = PhoneNumberField(blank=True)
     location = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.user.username}"
 
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

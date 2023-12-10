@@ -10,12 +10,12 @@ from .models import User
 from django.urls import reverse
 
 def register(request):
-    return render(request, 'register.html')
+    return render(request, 'accounts/register.html')
 
 class customer_register(CreateView):
     model = User
     form_class = CustomerSignUpForm
-    template_name = '/accounts/customer_register.html'
+    template_name = 'accounts/customer_register.html'
 
     def form_valid(self, form):
         user = form.save()
@@ -25,7 +25,7 @@ class customer_register(CreateView):
 class admin_register(CreateView):
     model = User
     form_class = AdminSignUpForm
-    template_name = '/accounts/admin_register.html'
+    template_name = 'accounts/admin_register.html'
 
     def form_valid(self, form):
         user = form.save()
@@ -42,12 +42,12 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None :
                 login(request,user)
-                return redirect(reverse('/'))
+                return redirect(reverse('base_view'))
             else:
                 messages.error(request,"Invalid username or password")
         else:
                 messages.error(request,"Invalid username or password")
-    return render(request, '../templates/accounts/login.html',
+    return render(request, 'accounts/login.html',
     context={'form':AuthenticationForm()})
 
 def logout_view(request):

@@ -8,7 +8,7 @@ from django.urls import reverse
 
 
 class CarListView(generic.ListView):
-    template_name = 'car_list.html'
+    template_name = 'demo-auto-services-products.html'
     model = models.CarAnnouncement
 
     def get_queryset(self):
@@ -17,7 +17,7 @@ class CarListView(generic.ListView):
 
 
 class CarDetailView(generic.DetailView):
-    template_name = "car_detail.html"
+    template_name = "start_mvp/car_detail.html"
 
     def get_object(self, **kwargs):
         car_id = self.kwargs.get('id')
@@ -26,7 +26,7 @@ class CarDetailView(generic.DetailView):
 
 
 class CarCreateView(generic.CreateView):
-    template_name = "car_create.html"
+    template_name = "start_mvp/car_create.html"
     model = models.CarAnnouncement
     form_class = forms.CarForm
     success_url = '/car_list/'
@@ -37,7 +37,7 @@ class CarCreateView(generic.CreateView):
 
 
 class CarDeleteView(generic.DeleteView):
-    template_name = 'confirm_delete.html'
+    template_name = 'start_mvp/confirm_delete.html'
     success_url = '/car_list/'
 
     def get_object(self, **kwargs):
@@ -45,7 +45,7 @@ class CarDeleteView(generic.DeleteView):
 
 
 class CarUpdateView(generic.UpdateView):
-    template_name = 'car_update.html'
+    template_name = 'start_mvp/car_update.html'
     form_class = forms.CarForm
     success_url = '/car_list/'
 
