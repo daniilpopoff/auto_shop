@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Person_Update</title>
+</head>
+<body>
+<div style="background-color: yellow">
+  <h1>Изменить</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Изменить</button>
+    <button type="reset">Очистить</button>
+  </form>
+</div>
+</body>
+</html>

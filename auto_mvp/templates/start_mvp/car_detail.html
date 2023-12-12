@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% with object as car %}
+    <title>{{ car.name_car }} Detail</title>
+</head>
+<body>
+    <div style="background-color: darksalmon; padding: 20px;">
+
+        <h1>Car Details: {{ car.name_car }}</h1>
+
+        <img src="{{ car.image.url }}" alt="{{ car.name_car }} Image" style="max-width: 100%; height: auto;">
+
+        <h2>Basic Information</h2>
+        <p><strong>Price (USD):</strong> ${{ car.price_usd }}</p>
+        <p><strong>Price (SOM):</strong> {{ car.price_soms }} SOM</p>
+        <p><strong>Year:</strong> {{ car.year }}</p>
+        <p><strong>Mileage:</strong> {{ car.mileage }} km</p>
+        <p><strong>Body Type:</strong> {{ car.body_type }}</p>
+        <p><strong>Color:</strong> {{ car.color }}</p>
+        <p><strong>Engine:</strong> {{ car.engine }}</p>
+        <p><strong>Transmission:</strong> {{ car.transmission }}</p>
+        <p><strong>Drive Type:</strong> {{ car.drive }}</p>
+
+        <h2>Additional Information</h2>
+        <p><strong>Steering Position:</strong> {% if car.steering_left %}Left{% else %}Right{% endif %}</p>
+        <p><strong>Condition:</strong> {{ car.condition }}</p>
+        <p><strong>Customs Clearance:</strong> {% if car.customs_clearance %}Yes{% else %}No{% endif %}</p>
+        <p><strong>Exchange Offer:</strong> {% if car.exchange_offer %}Yes{% else %}No{% endif %}</p>
+        <p><strong>Availability:</strong> {% if car.availability %}Yes{% else %}No{% endif %}</p>
+        <p><strong>Region/City:</strong> {{ car.region_city }}</p>
+        <p><strong>Country:</strong> {{ car.country }}</p>
+
+        <!-- Add more fields as needed -->
+
+
+{% endwith %}
+    </div>
+</body>
+</html>

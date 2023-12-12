@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete</title>
+</head>
+<body>
+<div style="background-color: lightpink">
+  <h1>Вы увернны что хотите удалить?</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button style="width: 100px; height: 100px;" type="submit">Да</button>
+  </form>
+     <button style="width: 100px; height: 100px;">
+         <a style="text-decoration: none; color: black" href="/person_list/">Нет</a>
+     </button>
+</div>
+</body>
+</html>
