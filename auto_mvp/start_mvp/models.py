@@ -15,6 +15,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
+
 def car_image_path(instance, filename):
     # Get the car's name from the instance
     car_name = instance.car_name

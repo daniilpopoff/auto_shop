@@ -124,6 +124,8 @@ html.lightbox-beforeclose .quick-view {
 
 .product-info img {
 	transition: all 0.2s;
+	/*height: 200px;  !* Set a fixed height for the product images *!*/
+    /*width: 300px;    !* Maintain the aspect ratio *!*/
 }
 
 .product-info h4 {

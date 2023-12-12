@@ -3,12 +3,11 @@ from django.http import HttpResponse
 from . import models, forms
 from django.views import generic
 from django.urls import reverse
-# Create your views here.
-
-
+from haystack.query import SearchQuerySet
+from .models import CarAnnouncement
 
 class CarListView(generic.ListView):
-    template_name = 'demo-auto-services-products.html'
+    template_name = 'demo-auto-services-products (1).html'
     model = models.CarAnnouncement
 
     def get_queryset(self):
@@ -17,7 +16,7 @@ class CarListView(generic.ListView):
 
 
 class CarDetailView(generic.DetailView):
-    template_name = "start_mvp/car_detail.html"
+    template_name = "shop-product-sidebar-left.html"
 
     def get_object(self, **kwargs):
         car_id = self.kwargs.get('id')
@@ -60,3 +59,12 @@ class CarUpdateView(generic.UpdateView):
 
 class BaseView(generic.TemplateView):
     template_name = "demo-auto-services.html"
+
+
+def search(request):
+    query = request.GET.get('q')
+    results = []
+
+    if query:
+        results = SearchQuerySet().models(CarAnnouncement).filter(content=query)
+    return render(request,'search.html', {'results' : results})
