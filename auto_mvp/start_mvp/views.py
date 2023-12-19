@@ -5,7 +5,7 @@ from django.views import generic
 from django.urls import reverse
 from haystack.query import SearchQuerySet
 from .models import CarAnnouncement
-
+from .forms import CarSearchForm
 class CarListView(generic.ListView):
     template_name = 'demo-auto-services-products (1).html'
     model = models.CarAnnouncement
@@ -28,7 +28,7 @@ class CarCreateView(generic.CreateView):
     template_name = "start_mvp/car_create.html"
     model = models.CarAnnouncement
     form_class = forms.CarForm
-    success_url = '/car_list/'
+    success_url = '/'
 
     def form_valid(self, form):
         print(form.cleaned_data)
@@ -46,7 +46,7 @@ class CarDeleteView(generic.DeleteView):
 class CarUpdateView(generic.UpdateView):
     template_name = 'start_mvp/car_update.html'
     form_class = forms.CarForm
-    success_url = '/car_list/'
+    success_url = 'car_list/'
 
     def get_object(self, **kwargs):
         car_id = self.kwargs.get('id')
@@ -61,10 +61,32 @@ class BaseView(generic.TemplateView):
     template_name = "demo-auto-services.html"
 
 
+class AboutView(generic.TemplateView):
+    template_name = "demo-auto-services-about-us.html"
+
+class ContactView(generic.TemplateView):
+    template_name = "demo-auto-services-contact.html"
+
 def search(request):
     query = request.GET.get('q')
     results = []
 
     if query:
         results = SearchQuerySet().models(CarAnnouncement).filter(content=query)
-    return render(request,'search.html', {'results' : results})
+    return render(request,'start_mvp/search.html', {'results' : results})
+
+def car_search_gpt(request):
+    form = CarSearchForm(request.GET)
+    cars = CarAnnouncement.objects.all()
+
+    if form.is_valid():
+        search_query = form.cleaned_data['search_query']
+        if search_query:
+            cars = cars.filter(name_car__icontains=search_query)
+
+    context = {
+        'form': form,
+        'cars': cars,
+    }
+
+    return render(request, 'start_mvp/car_search.html', context)

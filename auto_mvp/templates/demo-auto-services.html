@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
-		<!-- Basic -->
+	{% extends 'base_base.html' %}
 		{% load static %}
+		<!-- Basic -->
+
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">	
 
@@ -58,6 +59,7 @@
 		<script src="{% static 'vendor/modernizr/modernizr.min.js' %}"></script>
 
 	</head>
+	{% block content %}
 	<body>
 
 		<div class="body">
@@ -86,7 +88,11 @@
 										<div class="header-nav-top">
 											<ul class="nav nav-pills position-relative">
 												<li class="nav-item d-none d-sm-block">
-													<span class="d-flex align-items-center font-weight-medium ws-nowrap text-3 ps-0"><a href="mailto:porto@domain.com" class="text-decoration-none text-color-dark text-color-hover-primary"><i class="icons icon-envelope font-weight-bold position-relative text-4 top-3 me-1"></i> porto@domain.com</a></span>
+													{% if user.is_authenticated %}
+													<span class="d-flex align-items-center font-weight-medium ws-nowrap text-3 ps-0"> <i class="icons icon-envelope font-weight-bold position-relative text-4 top-3 me-1"></i> {{user.username}}</a></span>
+													{% else %}
+													<span class="d-flex align-items-center font-weight-medium ws-nowrap text-3 ps-0"> <i class="icons icon-envelope font-weight-bold position-relative text-4 top-3 me-1"></i> Please login</a></span>
+													{% endif %}
 												</li>
 												<li class="nav-item nav-item-left-border nav-item-left-border-remove nav-item-left-border-sm-show">
 													<span class="d-flex align-items-center font-weight-medium text-color-dark ws-nowrap text-3"><i class="icons icon-clock font-weight-bold position-relative text-3 top-1 me-2"></i> Mon - Sat 9:00am - 6:00pm</span>
@@ -121,40 +127,50 @@
 								<div class="header-row justify-content-between">
 									<div class="header-logo z-index-2 col-lg-2 px-0">
 										<a href="demo-auto-services.html">
-											<img alt="Porto" width="123" height="48" data-sticky-width="82" data-sticky-height="40" data-sticky-top="84" src="img/demos/auto-services/logo.png">
+											<img alt="Porto" width="123" height="48" data-sticky-width="82" data-sticky-height="40" data-sticky-top="84" src="{% static 'img/demos/auto-services/logo.png' %}">
 										</a>
 									</div>
 									<div class="header-nav header-nav-links justify-content-end pe-lg-4 me-lg-3">
 										<div class="header-nav-main header-nav-main-arrows header-nav-main-dropdown-no-borders header-nav-main-effect-3 header-nav-main-sub-effect-1">
 											<nav class="collapse">
 												<ul class="nav nav-pills" id="mainNav">
-													<li><a href="demo-auto-services.html" class="nav-link active">Home</a></li>
-													<li><a href="demo-auto-services-about-us.html" class="nav-link">About</a></li>
+													<li><a href="{% url  'base_view' %}" class="nav-link active">Home</a></li>
+													<li><a href="{% url  'about_us_view' %}" class="nav-link">About</a></li>
 													<li class="dropdown">
-														<a href="demo-auto-services-services.html" class="nav-link dropdown-toggle">Services</a>
+														<a href="#" class="nav-link dropdown-toggle">Services</a>
 														<ul class="dropdown-menu">
-															<li><a href="demo-auto-services-services-detail.html" class="dropdown-item">Brake Repair</a></li>
-															<li><a href="demo-auto-services-services-detail.html" class="dropdown-item">Check Engine</a></li>
-															<li><a href="demo-auto-services-services-detail.html" class="dropdown-item">Suspension Repair</a></li>
-															<li><a href="demo-auto-services-services-detail.html" class="dropdown-item">Transmission Repair</a></li>
-															<li><a href="demo-auto-services-services-detail.html" class="dropdown-item">A/C Repair</a></li>
+															<li><a href="#" class="dropdown-item">Car price prediction</a></li>
 														</ul>
 													</li>
 													<li><a href="{% url  'car_list' %}" class="nav-link">Products</a></li>
-													<li><a href="demo-auto-services-blog.html" class="nav-link">Blog</a></li>
-													<li><a href="demo-auto-services-appointment.html" class="nav-link">Appointment</a></li>
-													<li><a href="demo-auto-services-contact.html" class="nav-link">Contact</a></li>
+													<li><a href="#" class="nav-link">Blog</a></li>
+													<li><a href="#" class="nav-link">Appointment</a></li>
+													<li><a href="{% url 'contact_view' %}" class="nav-link">Contact</a></li>
 												</ul>
 											</nav>
 										</div>
 									</div>
+
 									<ul class="header-extra-info custom-left-border-1 d-none d-xl-block">
-										<li class="d-none d-sm-inline-flex ms-0">
-											<div class="header-extra-info-icon">
-												<i class="icons icon-user text-3 text-color-dark position-relative top-3"></i>
-											</div>
-										</li>
+											<li class="d-none d-sm-inline-flex ms-0">
+												{% if user.is_authenticated%}
+													<div class="header-extra-info-icon">
+															<a href="{% url 'profile' %}" class="button-link">
+																	<i class="icons icon-user text-3 text-color-dark position-relative top-3"></i>
+															</a>
+													</div>
+												{% else %}
+												<div class="header-extra-info-icon">
+															<a href="{% url 'login' %}" class="button-link">
+																	<i class="icons icon-user text-3 text-color-dark position-relative top-3"></i>
+															</a>
+													</div>
+												{% endif %}
+
+
+											</li>
 									</ul>
+
 									<div class="d-flex col-auto pe-0 ps-0 ps-xl-3">
 										<div class="header-nav-features ps-0 ms-1">
 											<div class="header-nav-feature header-nav-features-search d-inline-flex position-relative top-3 border border-top-0 border-bottom-0 custom-remove-mobile-border-left px-4 me-2">
@@ -182,7 +198,7 @@
 												<div class="header-nav-features-dropdown" id="headerTopCartDropdown">
 													<ol class="mini-products-list">
 														<li class="item">
-															<a href="#" title="Product Short Name" class="product-image"><img src="img/demos/auto-services/products/product-1.jpg" alt="Product Short Name"></a>
+															<a href="#" title="Product Short Name" class="product-image"><img src="{% static 'img/demos/auto-services/products/product-1.jpg' %}" alt="Product Short Name"></a>
 															<div class="product-details">
 																<p class="product-name">
 																	<a href="#">Product Short Name </a>
@@ -220,7 +236,7 @@
 
 				<section class="section custom-section-background position-relative border-0 overflow-hidden m-0 p-0">
 					<div class="position-absolute top-0 left-0 right-0 bottom-0 animated fadeIn" style="animation-delay: 600ms;">
-						<div class="background-image-wrapper custom-background-style-1 position-absolute top-0 left-0 right-0 bottom-0 animated kenBurnsToRight" style="background-image: url(img/demos/auto-services/backgrounds/background-1.jpg); background-position: center right; animation-duration: 30s;"></div>
+						<div class="background-image-wrapper custom-background-style-1 position-absolute top-0 left-0 right-0 bottom-0 animated kenBurnsToRight" style="background-image: url(&quot;https://www.portotheme.com/wordpress/porto/auto-services/wp-content/uploads/sites/117/2022/05/background.webp&quot;);"); background-position: center right; animation-duration: 30s;"></div>
 					</div>
 					<div class="container position-relative py-sm-5 my-5">
 						<svg class="custom-svg-1 d-none d-sm-block" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 649 578">
@@ -231,10 +247,10 @@
 						<div class="row mb-5 p-relative z-index-1">
 							<div class="col-md-8 col-lg-6 col-xl-5">
 								<div class="overflow-hidden mb-1">
-									<h2 class="font-weight-bold text-color-grey text-4-5 line-height-2 line-height-sm-7 mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="800">Mechanics Who Are Ready To Work For You</h2>
+									<h2 class="font-weight-bold text-color-grey text-4-5 line-height-2 line-height-sm-7 mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="800"> We Are Ready To Work For You</h2>
 								</div>
-								<h1 class="text-color-dark font-weight-bold text-8 pb-2 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1100">Reliable And Knowledgeable Mechanics Located In Los Angeles, CA</h1>
-								<a href="#" class="btn btn-primary custom-btn-border-radius custom-btn-arrow-effect-1 font-weight-bold text-3 px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1300">
+								<h1 class="text-color-dark font-weight-bold text-8 pb-2 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1100">Best platform to sale your car in Kyrgyzstan</h1>
+								<a href="{% url 'car_list' %}" class="btn btn-primary custom-btn-border-radius custom-btn-arrow-effect-1 font-weight-bold text-3 px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1300">
 									GET STARTED 
 									<svg class="ms-2" version="1.1" viewBox="0 0 15.698 8.706" width="17" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 										<polygon stroke="#FFF" stroke-width="0.1" fill="#FFF" points="11.354,0 10.646,0.706 13.786,3.853 0,3.853 0,4.853 13.786,4.853 10.646,8 11.354,8.706 15.698,4.353 "/>
@@ -249,7 +265,7 @@
 					<div class="container">
 						<div class="row align-items-center justify-content-center">
 							<div class="col-sm-9 col-md-12 col-lg-7 text-center text-lg-end mb-4 mb-lg-0">
-								<h2 class="font-weight-bold text-color-primary text-7 line-height-1 mb-1 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1700">Complete Auto Services and Body Shop</h2>
+								<h2 class="font-weight-bold text-color-primary text-7 line-height-1 mb-1 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1700">Predict price of your car</h2>
 								<p class="font-weight-bold text-4 mb-0 appear-animation" data-appear-animation="fadeInLeftShorterPlus" data-appear-animation-delay="1900">Make An Appointment Today With Our Online Form</p>
 							</div>
 							<div class="col-lg-5 text-center text-lg-start ps-lg-4">
@@ -286,21 +302,21 @@
 						<div class="col-10 col-md-9 col-lg-6 ps-lg-5 pe-5 appear-animation" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="1450" data-plugin-options="{'accY': -200}">
 							<div class="position-relative">
 								<div data-plugin-float-element data-plugin-options="{'startPos': 'top', 'speed': 0.2, 'transition': true, 'transitionDuration': 1000, 'isInsideSVG': true}">
-									<img src="img/demos/auto-services/generic-1.png" class="img-fluid" alt="" />
+									<img src="{% static '/img/ my/car_angar_exp.jpg' %}" class="img-fluid" alt="" />
 								</div>
 								<div class="position-absolute transform3dxy-n50" style="top: 25%; left: 7%;">
 									<div data-plugin-float-element data-plugin-options="{'startPos': 'top', 'speed': 0.5, 'transition': true, 'transitionDuration': 2000, 'isInsideSVG': false}">
-										<img src="img/demos/auto-services/generic-1-1.png" class="appear-animation" alt="" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="1700" />
+										<img src="{% static 'img/demos/auto-services/generic-1-1.png' %}" class="appear-animation" alt="" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="1700" />
 									</div>
 								</div>
 								<div class="position-absolute transform3dxy-n50 ms-5 pb-5 ms-xl-0" style="top: 32%; left: 85%;">
 									<div data-plugin-float-element data-plugin-options="{'startPos': 'top', 'speed': 1, 'transition': true, 'transitionDuration': 1500, 'isInsideSVG': false}">
-										<img src="img/demos/auto-services/generic-1-2.png" class="appear-animation" alt="" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="1900" />
+										<img src="{% static 'img/demos/auto-services/generic-1-2.png' %}" class="appear-animation" alt="" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="1900" />
 									</div>
 								</div>
 								<div class="position-absolute transform3dxy-n50" style="top: 90%; left: 19%;">
 									<div data-plugin-float-element data-plugin-options="{'startPos': 'top', 'speed': 2, 'transition': true, 'transitionDuration': 2500, 'isInsideSVG': false}">
-										<img src="img/demos/auto-services/generic-1-3.png" class="appear-animation" alt="" data-appear-animation="fadeInDownShorterPlus" data-appear-animation-delay="2100" />
+										<img src="{% static 'img/demos/auto-services/generic-1-3.png' %}" class="appear-animation" alt="" data-appear-animation="fadeInDownShorterPlus" data-appear-animation-delay="2100" />
 									</div>
 								</div>
 							</div>
@@ -308,10 +324,10 @@
 					</div>
 					<div class="row pb-2">
 						<div class="col-lg-4 text-center px-lg-5 mb-5 mb-lg-0">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-icon-box-style-1 appear-animation" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="250" data-plugin-options="{'accY': -200}">
 									<div class="custom-icon-style-1 mb-4">
-										<img width="50" src="img/demos/auto-services/icons/checklist.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary'}" />
+										<img width="50" src="{% static 'img/demos/auto-services/icons/checklist.svg' %}" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary'}" />
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-color-dark line-height-3 text-4-5 px-3 px-xl-5 my-2">Complete Auto Body and Paint Shop</h3>
 									<p>Lorem ipsum dolor sit a met, consectetur adipiscing elit.</p>
@@ -319,10 +335,10 @@
 							</a>
 						</div>
 						<div class="col-lg-4 text-center px-lg-5 mb-5 mb-lg-0">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-icon-box-style-1 appear-animation" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="500" data-plugin-options="{'accY': -200}">
 									<div class="custom-icon-style-1 mb-4">
-										<img width="50" src="img/demos/auto-services/icons/wheel-disk.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary'}" />
+										<img width="50" src="{% static 'img/demos/auto-services/icons/wheel-disk.svg' %}" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary'}" />
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-color-dark line-height-3 text-4-5 px-xl-5 my-2 mx-4">Free Diagnosis & Brake Checks</h3>
 									<p>Lorem ipsum dolor sit a met, consectetur adipiscing elit.</p>
@@ -330,10 +346,10 @@
 							</a>
 						</div>
 						<div class="col-lg-4 text-center px-lg-5">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-icon-box-style-1 appear-animation" data-appear-animation="fadeInRightShorterPlus" data-appear-animation-delay="750" data-plugin-options="{'accY': -200}">
 									<div class="custom-icon-style-1 mb-4">
-										<img width="50" src="img/demos/auto-services/icons/car-safe.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary'}" />
+										<img width="50" src="{% static 'img/demos/auto-services/icons/car-safe.svg' %}" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-primary'}" />
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-color-dark line-height-3 text-4-5 px-4 px-xl-5 my-2">Car Mechanics You Can Trust</h3>
 									<p>Lorem ipsum dolor sit a met, consectetur adipiscing elit.</p>
@@ -429,40 +445,40 @@
 					</div>
 					<div class="row row-gutter-sm mb-5 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750">
 						<div class="col-sm-6 col-lg-3 text-center mb-4 mb-lg-0">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
 									<div class="thumb-info-wrapper">
-										<img src="img/demos/auto-services/services/service-small-1.jpg" class="img-fluid" alt="">
+										<img src="https://www.portotheme.com/wordpress/porto/auto-services/wp-content/uploads/sites/117/2020/12/service-small-2.jpg" class="img-fluid" alt="">
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Brake Repair</h3>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-6 col-lg-3 text-center mb-4 mb-lg-0">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
 									<div class="thumb-info-wrapper">
-										<img src="img/demos/auto-services/services/service-small-2.jpg" class="img-fluid" alt="">
+										<img src="https://www.portotheme.com/wordpress/porto/auto-services/wp-content/uploads/sites/117/2020/12/service-small-1.jpg" class="img-fluid" alt="">
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Check Engine</h3>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-6 col-lg-3 text-center mb-4 mb-sm-0">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
 									<div class="thumb-info-wrapper">
-										<img src="img/demos/auto-services/services/service-small-3.jpg" class="img-fluid" alt="">
+										<img src="https://www.portotheme.com/wordpress/porto/auto-services/wp-content/uploads/sites/117/2020/12/service-small-4.jpg" class="img-fluid" alt="">
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Suspension Repair</h3>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-6 col-lg-3 text-center">
-							<a href="demo-auto-services-services-detail.html" class="text-decoration-none">
+							<a href="#" class="text-decoration-none">
 								<div class="custom-thumb-info-style-1 thumb-info thumb-info-no-borders thumb-info-no-borders-rounded thumb-info-lighten">
 									<div class="thumb-info-wrapper">
-										<img src="img/demos/auto-services/services/service-small-4.jpg" class="img-fluid" alt="">
+										<img src="https://www.portotheme.com/wordpress/porto/auto-services/wp-content/uploads/sites/117/2020/12/service-small-3.jpg" class="img-fluid" alt="">
 									</div>
 									<h3 class="text-transform-none font-weight-bold text-5 mt-2 mb-0">Transmission Repair</h3>
 								</div>
@@ -471,7 +487,7 @@
 					</div>
 					<div class="row">
 						<div class="col text-center">
-							<a href="demo-auto-services-services.html" class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="850">VIEW ALL SERVICES</a>
+							<a href="#" class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="850">VIEW ALL SERVICES</a>
 						</div>
 					</div>
 				</div>
@@ -557,8 +573,8 @@
 					<div class="container">
 						<div class="row align-items-center">
 							<div class="col-lg-6 col-xl-7 text-center text-lg-start mb-4 mb-lg-0">
-								<h2 class="text-color-light font-weight-medium text-3-5 line-height-2 line-height-sm-1 ls-0 mb-2 mb-lg-2">LOOKING FOR HONEST AND RELIABLE SERVICES?</h2>
-								<h3 class="font-weight-bold text-color-light text-transform-none text-8 line-height-2 line-height-lg-1 mb-1">Best Mechanics Downtown Los Angeles CA</h3>
+								<h2 class="text-color-light font-weight-medium text-3-5 line-height-2 line-height-sm-1 ls-0 mb-2 mb-lg-2">LOOKING FOR BEST VALUES CAR?</h2>
+								<h3 class="font-weight-bold text-color-light text-transform-none text-8 line-height-2 line-height-lg-1 mb-1">Сompare the price with all cars in the country</h3>
 								<p class="font-weight-bold text-color-light text-4 opacity-7 mb-0">Make An Appointment Today With Our Online Form</p>
 							</div>
 							<div class="col-lg-6 col-xl-5">
@@ -583,23 +599,23 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-6 col-md-3 px-0">
-								<a class="d-inline-block custom-img-thumbnail-style-1 img-thumbnail img-thumbnail-no-borders img-thumbnail-hover-icon rounded-0" href="img/demos/auto-services/generic/generic-square-1.jpg">
-									<img class="img-fluid rounded-0" src="img/demos/auto-services/generic/generic-square-1.jpg" alt="" />
+								<a class="d-inline-block custom-img-thumbnail-style-1 img-thumbnail img-thumbnail-no-borders img-thumbnail-hover-icon rounded-0" href="{% static 'img/demos/auto-services/generic/generic-square-1.jpg' %}">
+									<img class="img-fluid rounded-0" src="{% static '/img/ my/car-background-lxpcvskier9sn4ou.jpg' %}" alt="" />
 								</a>
 							</div>
 							<div class="col-6 col-md-3 px-0">
-								<a class="d-inline-block custom-img-thumbnail-style-1 img-thumbnail img-thumbnail-no-borders img-thumbnail-hover-icon rounded-0" href="img/demos/auto-services/generic/generic-square-2.jpg">
-									<img class="img-fluid rounded-0" src="img/demos/auto-services/generic/generic-square-2.jpg" alt="" />
+								<a class="d-inline-block custom-img-thumbnail-style-1 img-thumbnail img-thumbnail-no-borders img-thumbnail-hover-icon rounded-0" href="{% static 'img/demos/auto-services/generic/generic-square-2.jpg' % }">
+									<img class="img-fluid rounded-0" src="{% static '/img/ my/car_angar_exp.jpg' %}" alt="" />
 								</a>
 							</div>
 							<div class="col-6 col-md-3 px-0">
 								<a class="d-inline-block custom-img-thumbnail-style-1 img-thumbnail img-thumbnail-no-borders img-thumbnail-hover-icon rounded-0" href="img/demos/auto-services/generic/generic-square-3.jpg">
-									<img class="img-fluid rounded-0" src="img/demos/auto-services/generic/generic-square-3.jpg" alt="" />
+									<img class="img-fluid rounded-0" src="{% static 'img/ my/car_photo_base.avif' %}" alt="" />
 								</a>
 							</div>
 							<div class="col-6 col-md-3 px-0">
 								<a class="d-inline-block custom-img-thumbnail-style-1 img-thumbnail img-thumbnail-no-borders img-thumbnail-hover-icon rounded-0" href="img/demos/auto-services/generic/generic-square-4.jpg">
-									<img class="img-fluid rounded-0" src="img/demos/auto-services/generic/generic-square-4.jpg" alt="" />
+									<img class="img-fluid rounded-0" src="{% static '/img/ my/many_cars.jpeg' %}" alt="" />
 								</a>
 							</div>
 						</div>
@@ -754,7 +770,7 @@
 										</a>
 										<a href="shop-product-sidebar-left.html">
 											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="img/demos/auto-services/products/product-1.jpg">
+												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-1.jpg' %}">
 											</div>
 										</a>
 									</div>
@@ -789,7 +805,7 @@
 										</a>
 										<a href="shop-product-sidebar-left.html">
 											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="img/demos/auto-services/products/product-2.jpg">
+												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-2.jpg' %}">
 											</div>
 										</a>
 									</div>
@@ -824,7 +840,7 @@
 										</a>
 										<a href="shop-product-sidebar-left.html">
 											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="img/demos/auto-services/products/product-3.jpg">
+												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-3.jpg' %}">
 											</div>
 										</a>
 									</div>
@@ -859,7 +875,7 @@
 										</a>
 										<a href="shop-product-sidebar-left.html">
 											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="img/demos/auto-services/products/product-4.jpg">
+												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-4.jpg' %}">
 											</div>
 										</a>
 									</div>
@@ -881,7 +897,7 @@
 						</div>
 						<div class="row">
 							<div class="col text-center">
-								<a href="demo-auto-services-products.html" class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="800">VIEW ALL PRODUCTS</a>
+								<a href="{% url 'car_list' %}" class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="800">VIEW ALL PRODUCTS</a>
 							</div>
 						</div>
 					</div>
@@ -891,22 +907,22 @@
 					<div class="container py-4">
 						<div class="row align-items-center text-center py-5">
 							<div class="col-sm-4 col-lg-2 mb-5 mb-lg-0">
-								<img src="img/logos/logo-8.png" alt class="img-fluid" style="max-width: 90px;" />
+								<img src="{% static 'img/logos/logo-8.png' %}" alt class="img-fluid" style="max-width: 90px;" />
 							</div>
 							<div class="col-sm-4 col-lg-2 mb-5 mb-lg-0">
-								<img src="img/logos/logo-9.png" alt class="img-fluid" style="max-width: 140px;" />
+								<img src="{% static 'img/logos/logo-9.png' %}" alt class="img-fluid" style="max-width: 140px;" />
 							</div>
 							<div class="col-sm-4 col-lg-2 mb-5 mb-lg-0">
-								<img src="img/logos/logo-10.png" alt class="img-fluid" style="max-width: 140px;" />
+								<img src="{% static 'img/logos/logo-10.png' %}" alt class="img-fluid" style="max-width: 140px;" />
 							</div>
 							<div class="col-sm-4 col-lg-2 mb-5 mb-sm-0">
-								<img src="img/logos/logo-11.png" alt class="img-fluid" style="max-width: 140px;" />
+								<img src="{% static 'img/logos/logo-11.png' %}" alt class="img-fluid" style="max-width: 140px;" />
 							</div>
 							<div class="col-sm-4 col-lg-2 mb-5 mb-sm-0">
-								<img src="img/logos/logo-12.png" alt class="img-fluid" style="max-width: 100px;" />
+								<img src="{% static 'img/logos/logo-12.png' %}" alt class="img-fluid" style="max-width: 100px;" />
 							</div>
 							<div class="col-sm-4 col-lg-2">
-								<img src="img/logos/logo-13.png" alt class="img-fluid" style="max-width: 100px;" />
+								<img src="{% static 'img/logos/logo-13.png' %}" alt class="img-fluid" style="max-width: 100px;" />
 							</div>
 						</div>
 					</div>
@@ -924,7 +940,7 @@
 						<div class="col-md-4 mb-5 mb-md-0">
 							<div class="feature-box flex-column flex-xl-row align-items-center align-items-lg-start text-center text-lg-start">
 								<div class="feature-box-icon bg-transparent mb-4 mb-xl-0 p-0">
-									<img width="45" src="img/demos/auto-services/icons/icon-location.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-light position-relative bottom-3'}" />
+									<img width="45" src="{% static 'img/demos/auto-services/icons/icon-location.svg' %}" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-light position-relative bottom-3'}" />
 								</div>
 								<div class="feature-box-info line-height-1 ps-2">
 									<span class="d-block font-weight-bold text-color-light text-5 mb-2">Address</span>
@@ -948,7 +964,7 @@
 						<div class="col-md-4">
 							<div class="feature-box flex-column flex-xl-row align-items-center align-items-lg-start text-center text-lg-start">
 								<div class="feature-box-icon bg-transparent mb-4 mb-xl-0 p-0">
-									<img width="45" src="img/demos/auto-services/icons/car-winch.svg" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-light position-relative bottom-3'}" />
+									<img width="45" src="{% static 'img/demos/auto-services/icons/car-winch.svg' %}" alt="" data-icon data-plugin-options="{'onlySVG': true, 'extraClass': 'svg-fill-color-light position-relative bottom-3'}" />
 								</div>
 								<div class="feature-box-info line-height-1 ps-xl-3">
 									<span class="d-block font-weight-bold text-color-light text-5 pb-1 mb-1">24/7 Assistance</span>
@@ -965,7 +981,7 @@
 					<div class="row text-center text-md-start py-4 my-5">
 						<div class="col-md-6 col-lg-3 align-self-center text-center text-md-start text-lg-center mb-5 mb-lg-0">
 							<a href="demo-auto-services.html" class="text-decoration-none">
-								<img src="img/demos/auto-services/logo-light.png" class="img-fluid" alt="" />
+								<img src="{% static 'img/demos/auto-services/logo-light.png' %}" class="img-fluid" alt="" />
 							</a>
 						</div>
 						<div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
@@ -1006,15 +1022,15 @@
 						<div class="col-md-6 col-lg-2 mb-5 mb-md-0">
 							<h5 class="text-transform-none font-weight-bold text-color-light text-4-5 mb-4">Auto Services</h5>
 							<ul class="list list-unstyled mb-0">
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Brake Repair</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Check Engine</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Suspension Repair</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Transmission Repair</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">A/C Repair</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Oil Change</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Electrical Diagnostics</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Tune Up</a></li>
-								<li class="mb-0"><a href="demo-auto-services-services-detail.html">Fuel System Repair</a></li>
+								<li class="mb-0"><a href="#">Brake Repair</a></li>
+								<li class="mb-0"><a href="#">Check Engine</a></li>
+								<li class="mb-0"><a href="#">Suspension Repair</a></li>
+								<li class="mb-0"><a href="#">Transmission Repair</a></li>
+								<li class="mb-0"><a href="#">A/C Repair</a></li>
+								<li class="mb-0"><a href="#">Oil Change</a></li>
+								<li class="mb-0"><a href="#">Electrical Diagnostics</a></li>
+								<li class="mb-0"><a href="#">Tune Up</a></li>
+								<li class="mb-0"><a href="#">Fuel System Repair</a></li>
 							</ul>
 						</div>
 						<div class="col-md-6 col-lg-3 offset-lg-1">
@@ -1076,4 +1092,5 @@
 		<script src="{% static 'js/theme.init.js' %}"></script>
 
 	</body>
+{% endblock %}
 </html>

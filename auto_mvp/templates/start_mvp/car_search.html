@@ -1,0 +1,9 @@
+<!-- product_search.html -->
+<form method="get" action="{% url 'car_search' %}">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
+{% for car in cars %}
+    <p>{{ car.name_car }}</p>
+{% endfor %}

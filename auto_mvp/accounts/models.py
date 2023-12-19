@@ -23,4 +23,4 @@ class Customer(models.Model):
 class Admin(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     phone_number = PhoneNumberField(blank=True)
-    location = models.CharField(max_length=20)
+    location = models.CharField(max_length=255, null=True, blank=True, default="Kyrgyzstan")
