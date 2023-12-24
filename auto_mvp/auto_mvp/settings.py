@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'widget_tweaks',
     'haystack',
+    'mldeployment',
 ]
 
 MIDDLEWARE = [

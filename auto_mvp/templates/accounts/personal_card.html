@@ -70,6 +70,23 @@
     </div>
 </div>
 
+
+<div class="user-cars">
+    <h2>Your Cars</h2>
+    {% if user_cars %}
+        <ul>
+            {% for car in user_cars %}
+                <li>
+                    <strong>{{ car.make }} {{ car.model }} ({{ car.year }})</strong>
+                    <!-- Add more details as needed -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You don't have any cars listed.</p>
+    {% endif %}
+</div>
+
 <p>Welcome, {{ user.username }}!</p>
     <a href="{% url 'logout' %}">Logout</a>
 

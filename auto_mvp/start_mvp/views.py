@@ -1,11 +1,16 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+
 from . import models, forms
 from django.views import generic
 from django.urls import reverse
 from haystack.query import SearchQuerySet
 from .models import CarAnnouncement
 from .forms import CarSearchForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 class CarListView(generic.ListView):
     template_name = 'demo-auto-services-products (1).html'
     model = models.CarAnnouncement
@@ -23,7 +28,7 @@ class CarDetailView(generic.DetailView):
         return get_object_or_404(models.CarAnnouncement, id = car_id)
 
 
-
+@method_decorator(login_required, name='dispatch')
 class CarCreateView(generic.CreateView):
     template_name = "start_mvp/car_create.html"
     model = models.CarAnnouncement
@@ -31,9 +36,21 @@ class CarCreateView(generic.CreateView):
     success_url = '/'
 
     def form_valid(self, form):
-        print(form.cleaned_data)
+        user = self.request.user
+
+        form.instance.owner = user.customer
+        # Redirect the user or show an error message
+        # ...
         return super(CarCreateView, self).form_valid(form=form)
 
+    # def user_cars(request):
+    #     # Assuming the user is logged in
+    #     user = request.user
+    #
+    #     # Query all cars owned by the logged-in user
+    #     user_cars = CarAnnouncement.objects.filter(owner=user)
+
+        # return render(request, 'user_cars_template.html', {'user_cars': user_cars})
 
 class CarDeleteView(generic.DeleteView):
     template_name = 'start_mvp/confirm_delete.html'

@@ -20,7 +20,11 @@ class customer_register(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        # if user.is_customer:
+        #     Customer.objects.create(user=user)
         login(self.request, user)
+
+
         return redirect(reverse('base_view'))
 
 class admin_register(CreateView):
