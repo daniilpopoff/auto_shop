@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('start_mvp.urls')),
     path('accounts/', include('accounts.urls')),
+    path('ml/', include('mldeployment.urls')),
 
 ]
 if settings.DEBUG:

@@ -24,17 +24,34 @@ class CustomerSignUpForm(UserCreationForm):
                   'location']
 
 
+    # @transaction.atomic
+    # def save(self):
+    #     user = super().save(commit=False)
+    #     user.is_customer = True
+    #     user.first_name = self.cleaned_data.get('first_name')
+    #     user.last_name = self.cleaned_data.get('last_name')
+    #     user.save()
+    #     customer = Customer.objects.create(user=user)
+    #     customer.phone_number = self.cleaned_data.get('phone_number')
+    #     customer.location = self.cleaned_data.get('location')
+    #     customer.save()
+    #     return user
+
     @transaction.atomic
-    def save(self):
+    def save(self, commit=True):
         user = super().save(commit=False)
         user.is_customer = True
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
-        user.save()
-        customer = Customer.objects.create(user=user)
-        customer.phone_number = self.cleaned_data.get('phone_number')
-        customer.location = self.cleaned_data.get('location')
-        customer.save()
+        if commit:
+            user.save()
+
+        customer, created = Customer.objects.get_or_create(user=user)
+        if created:
+            customer.phone_number = self.cleaned_data.get('phone_number')
+            customer.location = self.cleaned_data.get('location')
+            customer.save()
+
         return user
 
 
@@ -56,16 +73,33 @@ class AdminSignUpForm(UserCreationForm):
                   'phone_number',
                   'location']
 
+    # @transaction.atomic
+    # def save(self):
+    #     user = super().save(commit=False)
+    #     user.is_admin = True
+    #     user.is_staff = True
+    #     user.first_name = self.cleaned_data.get('first_name')
+    #     user.last_name = self.cleaned_data.get('last_name')
+    #     user.save()
+    #     employee = Admin.objects.create(user=user)
+    #     employee.phone_number = self.cleaned_data.get('phone_number')
+    #     employee.location = self.cleaned_data.get('designation')
+    #     employee.save()
+    #     return user
+
     @transaction.atomic
-    def save(self):
+    def save(self, commit=True):
         user = super().save(commit=False)
-        user.is_admin = True
-        user.is_staff = True
+        user.is_customer = True
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
-        user.save()
-        employee = Admin.objects.create(user=user)
-        employee.phone_number = self.cleaned_data.get('phone_number')
-        employee.location = self.cleaned_data.get('designation')
-        employee.save()
+        if commit:
+            user.save()
+
+        customer, created = Customer.objects.get_or_create(user=user)
+        if created:
+            customer.phone_number = self.cleaned_data.get('phone_number')
+            customer.location = self.cleaned_data.get('location')
+            customer.save()
+
         return user

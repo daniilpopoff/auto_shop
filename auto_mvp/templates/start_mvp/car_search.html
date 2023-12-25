@@ -1,0 +1,16 @@
+
+<form method="get" action="{% url 'car_search' %}">
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+</form>
+{% for announcement in announcements %}
+    <div>
+        <h2><a href="{% url 'car_detail' announcement.id %}">{{ announcement.name }}</a></h2>
+        <!-- Add more details as needed -->
+    </div>
+{% endfor %}
+
+
+{% for car in cars %}
+    <p>{{ car.name_car }}</p>
+{% endfor %}

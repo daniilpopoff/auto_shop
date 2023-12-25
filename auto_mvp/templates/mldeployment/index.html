@@ -1,0 +1,19 @@
+<!-- mldeployment/templates/mldeployment/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Price Prediction</title>
+</head>
+<body>
+    <h1>Car Price Prediction</h1>
+    <form method="post" action="{% url 'predict_car_price' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if predicted_price %}
+        <p>Predicted Price: {{ predicted_price }}</p>
+    {% endif %}
+</body>
+</html>

@@ -2,7 +2,9 @@ from django.db import models
 from django.utils.html import format_html
 from django.contrib import admin
 from django.utils import timezone
+from django.urls import reverse
 import os
+
 
 
 
@@ -30,7 +32,7 @@ def car_image_path(instance, filename):
     return os.path.join('car_images', unique_filename)
 # Define the Car model
 class CarAnnouncement(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)  # Foreign Key to User model
+    owner = models.ForeignKey("accounts.Customer", on_delete=models.CASCADE)  # Foreign Key to User model
     name_car = models.CharField(max_length=50)
     image = models.ImageField(upload_to='car_images/')  # For storing one or more images
     price_usd = models.DecimalField(max_digits=15, decimal_places=2)  # Price in USD
@@ -56,6 +58,8 @@ class CarAnnouncement(models.Model):
     def __str__(self):
         return self.name_car
 
+    def get_absolute_url(self):
+        return reverse('car_detail', kwargs={'id': self.id})
 
     def colored_name(self):
         return format_html(
