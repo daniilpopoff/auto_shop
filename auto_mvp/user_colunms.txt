@@ -1,0 +1,15 @@
+Mileage
+Body_Type
+Color
+Transmission
+Drive
+Steering
+Condition
+Customs
+Availability
+Region_City_of_Sale
+Registration
+Engine_volume
+Engine_fuel_type
+Car_make
+Door_num

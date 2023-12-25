@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
-
+from django.urls import reverse_lazy
 from . import models, forms
 from django.views import generic
 from django.urls import reverse
@@ -33,7 +33,7 @@ class CarCreateView(generic.CreateView):
     template_name = "start_mvp/car_create.html"
     model = models.CarAnnouncement
     form_class = forms.CarForm
-    success_url = '/'
+    success_url = reverse_lazy('car_list')
 
     def form_valid(self, form):
         user = self.request.user
@@ -53,11 +53,13 @@ class CarCreateView(generic.CreateView):
         # return render(request, 'user_cars_template.html', {'user_cars': user_cars})
 
 class CarDeleteView(generic.DeleteView):
+    model = CarAnnouncement
     template_name = 'start_mvp/confirm_delete.html'
     success_url = '/car_list/'
 
     def get_object(self, **kwargs):
         car_id = self.kwargs.get('id')
+        return get_object_or_404(CarAnnouncement, id= car_id)
 
 
 class CarUpdateView(generic.UpdateView):
@@ -84,26 +86,39 @@ class AboutView(generic.TemplateView):
 class ContactView(generic.TemplateView):
     template_name = "demo-auto-services-contact.html"
 
-def search(request):
-    query = request.GET.get('q')
-    results = []
+# def search(request):
+#     query = request.GET.get('q')
+#     results = []
+#
+#     if query:
+#         results = SearchQuerySet().models(CarAnnouncement).filter(content=query)
+#     return render(request,'page-search-results.html', {'results' : results})
 
+
+def search_results(request):
+    query = request.GET.get('query', '')
     if query:
-        results = SearchQuerySet().models(CarAnnouncement).filter(content=query)
-    return render(request,'start_mvp/search.html', {'results' : results})
+        announcements = CarAnnouncement.objects.filter(name_car__icontains=query)
+    else:
+        announcements = CarAnnouncement.objects.none()
 
-def car_search_gpt(request):
-    form = CarSearchForm(request.GET)
-    cars = CarAnnouncement.objects.all()
+    return render(request, 'page-search-results.html', {'announcements': announcements})
 
-    if form.is_valid():
-        search_query = form.cleaned_data['search_query']
-        if search_query:
-            cars = cars.filter(name_car__icontains=search_query)
 
-    context = {
-        'form': form,
-        'cars': cars,
-    }
 
-    return render(request, 'start_mvp/car_search.html', context)
+# def car_search_gpt(request):
+#     form = CarSearchForm(request.GET)
+#     cars = CarAnnouncement.objects.all()
+#
+#     if form.is_valid():
+#         search_query = form.cleaned_data['search_query']
+#         if search_query:
+#             cars = cars.filter(name_car__icontains=search_query)
+#
+#     context = {
+#         'form': form,
+#         'cars': cars,
+#     }
+#
+#     return render(request, 'start_mvp/car_search.html', context)
+

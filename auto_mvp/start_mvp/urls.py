@@ -11,6 +11,6 @@ urlpatterns =[
      path('car_list/<int:id>/delete', views.CarDeleteView.as_view(), name='car_delete'),
      path('car_list/<int:id>/update', views.CarUpdateView.as_view(), name='car-update'),
      path('create_car/', views.CarCreateView.as_view()),
-     path('search/', views.search, name='search'),
-     path('search_gpt/', views.car_search_gpt, name='car_search'),#car_serch был рабочий
+     path('search/', views.search_results, name='search'),
+     # path('search_gpt/', views.car_search_gpt, name='car_search'),#car_serch был рабочий
 ]

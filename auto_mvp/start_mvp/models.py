@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.html import format_html
 from django.contrib import admin
 from django.utils import timezone
-
+from django.urls import reverse
 import os
 
 
@@ -58,6 +58,8 @@ class CarAnnouncement(models.Model):
     def __str__(self):
         return self.name_car
 
+    def get_absolute_url(self):
+        return reverse('car_detail', kwargs={'id': self.id})
 
     def colored_name(self):
         return format_html(

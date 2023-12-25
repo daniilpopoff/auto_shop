@@ -178,9 +178,9 @@
 													<i class="icons icon-magnifier header-nav-top-icon text-5 font-weight-bold position-relative top-3"></i>
 												</a>
 												<div class="header-nav-features-dropdown header-nav-features-dropdown-mobile-fixed border-radius-0" id="headerTopSearchDropdown">
-													<form role="search" action="page-search-results.html" method="get">
+													<form role="search" action="{% url 'search' %}" method="get">
 														<div class="simple-search input-group">
-															<input class="form-control text-1 rounded" id="headerSearch" name="q" type="search" value="" placeholder="Search...">
+															<input class="form-control text-1 rounded" id="headerSearch" name="query" type="search" value="" placeholder="Search...">
 															<button class="btn" type="submit">
 																<i class="icons icon-magnifier header-nav-top-icon"></i>
 															</button>
@@ -588,7 +588,7 @@
 											<strong class="text-4-5"><a href="tel:+1234567890" class="text-color-light text-decoration-none">+123 4567 890</a></strong>
 										</div>
 									</div>
-									<a href="demo-auto-services-appointment.html" class="btn btn-light btn-outline custom-btn-border-radius font-weight-bold text-color-light text-color-hover-dark bg-color-hover-light btn-px-5 btn-py-3">MAKE AN APPOINTMENT</a>
+									<a href="{% url 'predict_car_price' %}" class="btn btn-light btn-outline custom-btn-border-radius font-weight-bold text-color-light text-color-hover-dark bg-color-hover-light btn-px-5 btn-py-3">MAKE AN APPOINTMENT</a>
 								</div>
 							</div>
 						</div>
@@ -740,168 +740,168 @@
 					</div>
 				</div>
 
-				<section class="shop section section-height-4 border-0 m-0">
-					<div class="container">
-						<div class="row justify-content-center pb-3 mb-4">
-							<div class="col-lg-8 text-center">
-								<div class="overflow-hidden">
-									<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="250">Products For Sale</h2>
-								</div>
-								<div class="d-inline-block custom-divider divider divider-primary divider-small my-3">
-									<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim" data-appear-animation-delay="600">
-								</div>
-								<p class="font-weight-light text-3-5 mb-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="500">Cras a elit sit amet leo accumsan volutpat. Suspendisse hendrerit vehicula leo, vel efficitur felis ultrices non. Integer aliquet ullamcorper dolor, quis sollicitudin.</p>
-							</div>
-						</div>
-						<div class="products row row-gutter-sm mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750">
-							<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
-								<div class="product mb-0">
-									<div class="product-thumb-info border-0 mb-3">
-										<div class="product-thumb-info-badges-wrapper">
-											<span class="badge badge-ecommerce badge-danger">27% OFF</span>
-										</div>
-										<div class="addtocart-btn-wrapper">
-											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">
-												<i class="icons icon-bag"></i>
-											</a>
-										</div>
-										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">
-											QUICK VIEW
-										</a>
-										<a href="shop-product-sidebar-left.html">
-											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-1.jpg' %}">
-											</div>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<div>
-											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>
-											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>
-										</div>
-									</div>
-									<div title="Rated 5 out of 5">
-										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">
-									</div>
-									<p class="price text-5 mb-3">
-										<span class="sale text-color-dark font-weight-medium">49,00</span>
-										<span class="amount">59,00</span>
-									</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
-								<div class="product mb-0">
-									<div class="product-thumb-info border-0 mb-3">
-										<div class="product-thumb-info-badges-wrapper">
-											<span class="badge badge-ecommerce badge-danger">27% OFF</span>
-										</div>
-										<div class="addtocart-btn-wrapper">
-											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">
-												<i class="icons icon-bag"></i>
-											</a>
-										</div>
-										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">
-											QUICK VIEW
-										</a>
-										<a href="shop-product-sidebar-left.html">
-											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-2.jpg' %}">
-											</div>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<div>
-											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>
-											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>
-										</div>
-									</div>
-									<div title="Rated 5 out of 5">
-										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">
-									</div>
-									<p class="price text-5 mb-3">
-										<span class="sale text-color-dark font-weight-medium">49,00</span>
-										<span class="amount">59,00</span>
-									</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-lg-3 mb-4 mb-sm-0">
-								<div class="product mb-0">
-									<div class="product-thumb-info border-0 mb-3">
-										<div class="product-thumb-info-badges-wrapper">
-											<span class="badge badge-ecommerce badge-danger">27% OFF</span>
-										</div>
-										<div class="addtocart-btn-wrapper">
-											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">
-												<i class="icons icon-bag"></i>
-											</a>
-										</div>
-										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">
-											QUICK VIEW
-										</a>
-										<a href="shop-product-sidebar-left.html">
-											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-3.jpg' %}">
-											</div>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<div>
-											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>
-											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>
-										</div>
-									</div>
-									<div title="Rated 5 out of 5">
-										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">
-									</div>
-									<p class="price text-5 mb-3">
-										<span class="sale text-color-dark font-weight-medium">49,00</span>
-										<span class="amount">59,00</span>
-									</p>
-								</div>
-							</div>
-							<div class="col-lg-3 col-sm-6">
-								<div class="product mb-0">
-									<div class="product-thumb-info border-0 mb-3">
-										<div class="product-thumb-info-badges-wrapper">
-											<span class="badge badge-ecommerce badge-danger">27% OFF</span>
-										</div>
-										<div class="addtocart-btn-wrapper">
-											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">
-												<i class="icons icon-bag"></i>
-											</a>
-										</div>
-										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">
-											QUICK VIEW
-										</a>
-										<a href="shop-product-sidebar-left.html">
-											<div class="product-thumb-info-image bg-light">
-												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-4.jpg' %}">
-											</div>
-										</a>
-									</div>
-									<div class="d-flex justify-content-between">
-										<div>
-											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>
-											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>
-										</div>
-									</div>
-									<div title="Rated 5 out of 5">
-										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">
-									</div>
-									<p class="price text-5 mb-3">
-										<span class="sale text-color-dark font-weight-medium">49,00</span>
-										<span class="amount">59,00</span>
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col text-center">
-								<a href="{% url 'car_list' %}" class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="800">VIEW ALL PRODUCTS</a>
-							</div>
-						</div>
-					</div>
-				</section>
+<!--				<section class="shop section section-height-4 border-0 m-0">-->
+<!--					<div class="container">-->
+<!--						<div class="row justify-content-center pb-3 mb-4">-->
+<!--							<div class="col-lg-8 text-center">-->
+<!--								<div class="overflow-hidden">-->
+<!--									<h2 class="font-weight-bold text-color-dark line-height-1 mb-0 appear-animation" data-appear-animation="maskUp" data-appear-animation-delay="250">Products For Sale</h2>-->
+<!--								</div>-->
+<!--								<div class="d-inline-block custom-divider divider divider-primary divider-small my-3">-->
+<!--									<hr class="my-0 appear-animation" data-appear-animation="customLineProgressAnim" data-appear-animation-delay="600">-->
+<!--								</div>-->
+<!--								<p class="font-weight-light text-3-5 mb-0 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="500">Cras a elit sit amet leo accumsan volutpat. Suspendisse hendrerit vehicula leo, vel efficitur felis ultrices non. Integer aliquet ullamcorper dolor, quis sollicitudin.</p>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="products row row-gutter-sm mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="750">-->
+<!--							<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">-->
+<!--								<div class="product mb-0">-->
+<!--									<div class="product-thumb-info border-0 mb-3">-->
+<!--										<div class="product-thumb-info-badges-wrapper">-->
+<!--											<span class="badge badge-ecommerce badge-danger">27% OFF</span>-->
+<!--										</div>-->
+<!--										<div class="addtocart-btn-wrapper">-->
+<!--											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">-->
+<!--												<i class="icons icon-bag"></i>-->
+<!--											</a>-->
+<!--										</div>-->
+<!--										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">-->
+<!--											QUICK VIEW-->
+<!--										</a>-->
+<!--										<a href="shop-product-sidebar-left.html">-->
+<!--											<div class="product-thumb-info-image bg-light">-->
+<!--												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-1.jpg' %}">-->
+<!--											</div>-->
+<!--										</a>-->
+<!--									</div>-->
+<!--									<div class="d-flex justify-content-between">-->
+<!--										<div>-->
+<!--											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>-->
+<!--											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div title="Rated 5 out of 5">-->
+<!--										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">-->
+<!--									</div>-->
+<!--									<p class="price text-5 mb-3">-->
+<!--										<span class="sale text-color-dark font-weight-medium">49,00</span>-->
+<!--										<span class="amount">59,00</span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">-->
+<!--								<div class="product mb-0">-->
+<!--									<div class="product-thumb-info border-0 mb-3">-->
+<!--										<div class="product-thumb-info-badges-wrapper">-->
+<!--											<span class="badge badge-ecommerce badge-danger">27% OFF</span>-->
+<!--										</div>-->
+<!--										<div class="addtocart-btn-wrapper">-->
+<!--											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">-->
+<!--												<i class="icons icon-bag"></i>-->
+<!--											</a>-->
+<!--										</div>-->
+<!--										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">-->
+<!--											QUICK VIEW-->
+<!--										</a>-->
+<!--										<a href="shop-product-sidebar-left.html">-->
+<!--											<div class="product-thumb-info-image bg-light">-->
+<!--												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-2.jpg' %}">-->
+<!--											</div>-->
+<!--										</a>-->
+<!--									</div>-->
+<!--									<div class="d-flex justify-content-between">-->
+<!--										<div>-->
+<!--											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>-->
+<!--											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div title="Rated 5 out of 5">-->
+<!--										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">-->
+<!--									</div>-->
+<!--									<p class="price text-5 mb-3">-->
+<!--										<span class="sale text-color-dark font-weight-medium">49,00</span>-->
+<!--										<span class="amount">59,00</span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="col-sm-6 col-lg-3 mb-4 mb-sm-0">-->
+<!--								<div class="product mb-0">-->
+<!--									<div class="product-thumb-info border-0 mb-3">-->
+<!--										<div class="product-thumb-info-badges-wrapper">-->
+<!--											<span class="badge badge-ecommerce badge-danger">27% OFF</span>-->
+<!--										</div>-->
+<!--										<div class="addtocart-btn-wrapper">-->
+<!--											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">-->
+<!--												<i class="icons icon-bag"></i>-->
+<!--											</a>-->
+<!--										</div>-->
+<!--										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">-->
+<!--											QUICK VIEW-->
+<!--										</a>-->
+<!--										<a href="shop-product-sidebar-left.html">-->
+<!--											<div class="product-thumb-info-image bg-light">-->
+<!--												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-3.jpg' %}">-->
+<!--											</div>-->
+<!--										</a>-->
+<!--									</div>-->
+<!--									<div class="d-flex justify-content-between">-->
+<!--										<div>-->
+<!--											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>-->
+<!--											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div title="Rated 5 out of 5">-->
+<!--										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">-->
+<!--									</div>-->
+<!--									<p class="price text-5 mb-3">-->
+<!--										<span class="sale text-color-dark font-weight-medium">49,00</span>-->
+<!--										<span class="amount">59,00</span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--							<div class="col-lg-3 col-sm-6">-->
+<!--								<div class="product mb-0">-->
+<!--									<div class="product-thumb-info border-0 mb-3">-->
+<!--										<div class="product-thumb-info-badges-wrapper">-->
+<!--											<span class="badge badge-ecommerce badge-danger">27% OFF</span>-->
+<!--										</div>-->
+<!--										<div class="addtocart-btn-wrapper">-->
+<!--											<a href="shop-cart.html" class="text-decoration-none addtocart-btn" title="Add to Cart">-->
+<!--												<i class="icons icon-bag"></i>-->
+<!--											</a>-->
+<!--										</div>-->
+<!--										<a href="ajax/demo-auto-services-product-quick-view.html" class="quick-view text-uppercase font-weight-semibold text-2">-->
+<!--											QUICK VIEW-->
+<!--										</a>-->
+<!--										<a href="shop-product-sidebar-left.html">-->
+<!--											<div class="product-thumb-info-image bg-light">-->
+<!--												<img alt="" class="img-fluid" src="{% static 'img/demos/auto-services/products/product-4.jpg' %}">-->
+<!--											</div>-->
+<!--										</a>-->
+<!--									</div>-->
+<!--									<div class="d-flex justify-content-between">-->
+<!--										<div>-->
+<!--											<a href="#" class="d-block text-uppercase text-decoration-none text-color-default text-color-hover-primary line-height-1 text-0 mb-1">CATEGORY</a>-->
+<!--											<h3 class="text-3-5 font-weight-medium font-alternative text-transform-none line-height-3 mb-0"><a href="" class="text-color-dark text-color-hover-primary">Product Short Name</a></h3>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div title="Rated 5 out of 5">-->
+<!--										<input type="text" class="d-none" value="5" title="" data-plugin-star-rating data-plugin-options="{'displayOnly': true, 'color': 'default', 'size':'xs'}">-->
+<!--									</div>-->
+<!--									<p class="price text-5 mb-3">-->
+<!--										<span class="sale text-color-dark font-weight-medium">49,00</span>-->
+<!--										<span class="amount">59,00</span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="row">-->
+<!--							<div class="col text-center">-->
+<!--								<a href="{% url 'car_list' %}" class="btn btn-primary custom-btn-border-radius font-weight-bold text-3 btn-px-5 btn-py-3 appear-animation" data-appear-animation="fadeInUpShorterPlus" data-appear-animation-delay="800">VIEW ALL PRODUCTS</a>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</section>-->
 
 				<section class="section bg-transparent position-relative border-0 z-index-1 m-0 p-0">
 					<div class="container py-4">
