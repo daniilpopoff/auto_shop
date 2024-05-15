@@ -65,7 +65,7 @@ class CarDeleteView(generic.DeleteView):
 class CarUpdateView(generic.UpdateView):
     template_name = 'start_mvp/car_update.html'
     form_class = forms.CarForm
-    success_url = 'car_list/'
+    success_url = '/car_list/'
 
     def get_object(self, **kwargs):
         car_id = self.kwargs.get('id')
